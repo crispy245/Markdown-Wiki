@@ -1,0 +1,19 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>Results</h1>
+
+    <ul>
+        <h3>We could not find results for "{{ searched }}"</h3>
+        <p> Perhaps you meant one of this ones below: </p>
+
+        {% for entry in entries %}
+            <li><a href="wiki/{{entry}}">{{entry}}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
