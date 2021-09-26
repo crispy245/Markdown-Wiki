@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: white;
+    overflow: scroll;
 }
 
 code {
@@ -36,4 +37,15 @@ textarea {
 .sidebar h2 {
     margin-top: 5px;
 }
+.entry-title{
+    display: flex;
+    flex-direction: row;
+}
+
+#edit-button{
+    margin-left: 100px;
+}
+
+
+
 

@@ -1,16 +1,38 @@
 {% extends "encyclopedia/layout.html" %}
 
+
 {% block title %}
     Encyclopedia
 {% endblock %}
 
 {% block body %}
     <h1>New Entry</h1>
-    <div class="form-group">
-        <form method="POST">
+    <div id="succes" >
+         {% include "encyclopedia/succes.html" %}
+    </div>
+    <div class="entry-body">
+        <form action="{% url 'new_entry' %} "
+            data-hx-post = "{% url 'new_entry' %}"
+            hx-target = "#preview-body"
+            hx-swap = "innerHTML"
+            method="POST"
+            hx-trigger="keyup change delay:200ms">
+            {{form.as_table}}
             {% csrf_token %}
-            {{form.as_p}}
-            <input type="submit" placeholder="Save">
+            <div id="btn">
+                <button 
+                hx-post="{% url 'save' %}"
+                hx-target = "#succes"
+                name="save-edit">
+                    Save
+                </button>
+            </div>
         </form>
     </div>
+    
+    
+    <div id="preview-body">    
+        {% include "encyclopedia/entry_preview.html" %}
+    </div>
+    
 {% endblock %}

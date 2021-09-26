@@ -5,15 +5,20 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Results</h1>
+<h1>Results</h1>
 
-    <ul>
-        {% if found %}
-        {{entry|safe}}
-        {% else %}
-        <h3>Sorry but that link you tried to access does not exist.</h3>
-        {% endif %}
-        
-    </ul>
+<div id='entry-body'>
+    {% if found %}
+    <h1>{{title}}</h1>
+    {{entry|safe}}
+    {% else %}
+    <h3>Sorry but that link you tried to access does not exist.</h3>
+    {% endif %}
+
+</div>
+    <form action="{% url 'edit' entry=title %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" name="edit" value="Edit">
+    </form>
 
 {% endblock %}

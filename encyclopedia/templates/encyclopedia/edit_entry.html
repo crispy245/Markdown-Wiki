@@ -1,0 +1,38 @@
+
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+<div id=all-container>
+    <h1>Edit</h1>
+        <div id="succes" >
+            {% include "encyclopedia/succes.html" %}
+        </div>
+        {{ form.non_field_errors }}
+        <form
+            hx-post = "{% url 'edit' entry=form.title.value %}"
+            hx-target = #preview-body
+            #hx-swap = "innerHTML"
+            method="POST"
+            hx-trigger="every 1s">
+
+            {{ form }}
+            {% csrf_token %}
+            
+            <button 
+                hx-post="{% url 'save_edit' %}" 
+                name="save-edit">
+                Save
+            </button>
+        </form>
+</div>
+
+<div id="preview-body">
+    {% include "encyclopedia/entry_preview.html" %}
+</div>
+
+
+{% endblock %}
